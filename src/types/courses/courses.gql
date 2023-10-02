@@ -1,0 +1,27 @@
+type Course {
+    id: ID
+    title: String
+    authorName: String
+    totalOfCredits: Int
+    courseType: String
+    imageUrl: String
+}
+
+input GetCoursesInput {
+    platformOS: String
+    platformVersion: String
+    clientVersion: String
+    pushNotificationToken: String
+    deviceName: String
+    deviceId: String
+}
+
+type GetCoursesResponse implements BackendResponse {
+  success: Boolean
+  message: String
+  courses: [Course]
+}
+
+type Query {
+  getCourses(input: GetCoursesInput): GetCoursesResponse
+}

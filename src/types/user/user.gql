@@ -1,0 +1,80 @@
+type User {
+  id: ID
+  firstName: String
+  lastName: String
+  username: String
+  password: String
+  repeatPassword: String
+  language: String
+  userType: String
+  lkUserType: Int
+  country: Int
+  specialty: Int
+  isCommercialCommunicationsAccepted: Boolean
+  isHealthcareProfessional: Boolean
+}
+
+input UserSigInInput {
+  platformOS: String
+  platformVersion: String
+  clientVersion: String
+  pushNotificationToken: String
+  deviceName: String
+  deviceId: String
+}
+
+input UserSignUpInput {
+  firstName: String
+  lastName: String
+  username: String
+  password: String
+  repeatPassword: String
+  language: String
+  userType: String
+  lkUserType: Int
+  country: Int
+  specialty: Int
+  isCommercialCommunicationsAccepted: Boolean
+  isHealthcareProfessional: Boolean
+}
+
+interface BackendResponse {
+  success: Boolean
+  message: String
+}
+
+type BasicResponse implements BackendResponse {
+  success: Boolean
+  message: String
+}
+
+type SigninResponse implements BackendResponse {
+  success: Boolean
+  message: String
+  user: User
+}
+
+input TokenInput {
+  client_id: String
+  client_secret: String
+  username: String
+  password: String
+  grant_type: String
+}
+
+type Token {
+  jti: String
+  scope: String
+  Token_type: String
+  access_token: String
+  refresh_token: String
+}
+
+type Query {
+  token(input: TokenInput): Token
+  signin(input: UserSigInInput): SigninResponse
+}
+
+type Mutation {
+  signup(input: UserSignUpInput): BasicResponse
+}
